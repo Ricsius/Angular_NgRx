@@ -3,6 +3,7 @@ import { map, Observable } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
+import { selectCount, selectCountDouble } from '../store/counter.selectors';
 
 @Component({
   selector: 'app-counter-output',
@@ -16,7 +17,7 @@ export class CounterOutputComponent {
   double$: Observable<number>;
 
   constructor(private store: Store<{counter: number}>) {
-    this.count$ = store.select('counter');
-    this.double$ = this.count$.pipe(map(n => n * 2))
+    this.count$ = store.select(selectCount);
+    this.double$ = store.select(selectCountDouble);
   }
 }
